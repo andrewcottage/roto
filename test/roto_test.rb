@@ -6,6 +6,7 @@ class TestRoto < Minitest::Test
     @roto = Roto.new
     @path = "#{Dir.pwd}/test/fixtures"
   end
+  
   def test_that_finder_can_find_jpgs    
     filetypes=['jpg']
     photos = @roto.find_photos(@path, filetypes)
