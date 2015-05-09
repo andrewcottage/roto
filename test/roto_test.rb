@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "../lib/roto.rb"
+require "./lib/roto.rb"
 
 class TestRoto < Minitest::Test
   def setup
