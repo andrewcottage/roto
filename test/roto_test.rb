@@ -6,7 +6,9 @@ class TestRoto < Minitest::Test
     @roto = Roto.new
   end
   def test_that_finder_can_find
-    photos = @roto.find('./fixtures', filetypes=['jpg'])
+    path = "#{Dir.pwd}/fixtures"
+    filetypes=['jpg']
+    photos = @roto.find_photos(path, filetypes)
     assert_equal ['test.jpg'], photos
   end
 
