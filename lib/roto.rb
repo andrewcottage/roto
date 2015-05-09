@@ -11,4 +11,10 @@ class Roto
     end
     return files.flatten
   end
+
+  def move_files(files, destination)
+  	files.each do |file|
+			FileUtils.mv("#{file}", "#{destination}")
+		end
+  end
 end

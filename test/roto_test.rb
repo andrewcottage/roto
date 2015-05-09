@@ -5,6 +5,13 @@ class TestRoto < Minitest::Test
   def setup
     @roto = Roto.new
     @path = "#{Dir.pwd}/test/fixtures"
+    FileUtils.touch("#{@path}/test.jpg")
+    FileUtils.touch("#{@path}/test.png")
+    FileUtils.touch("#{@path}/test.mp4")
+  end
+
+  def teardown
+    FileUtils.rm_rf("#{@path}/moved_files/.")
   end
   
   def test_that_finder_can_find_jpgs    
@@ -33,6 +40,11 @@ class TestRoto < Minitest::Test
 
 
   def test_that_mover_can_move
+    filetypes = ['mp4', 'jpg', 'png']
+    destinaton = "#{@path}/moved_files"
+    files = @roto.find_photos(@path, filetypes)
+    @roto.move_files(files, destinaton)
+    assert_equal ["#{destinaton}/test.mp4", "#{destinaton}/test.jpg", "#{destinaton}/test.png"], @roto.find_photos(destinaton, filetypes)
   end
 
   def test_that_duplicates_are_reconciled
