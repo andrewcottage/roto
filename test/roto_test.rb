@@ -6,10 +6,10 @@ class TestRoto < Minitest::Test
     @roto = Roto.new
   end
   def test_that_finder_can_find
-    path = "#{Dir.pwd}/fixtures"
+    path = "#{Dir.pwd}/test/fixtures"
     filetypes=['jpg']
     photos = @roto.find_photos(path, filetypes)
-    assert_equal ['test.jpg'], photos
+    assert_equal ["#{Dir.pwd}/test/fixtures/test.jpg"], photos
   end
 
   def test_that_mover_can_move

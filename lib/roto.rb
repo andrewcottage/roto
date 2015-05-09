@@ -5,8 +5,6 @@ class Roto
   end
 
   def find_photos(path, types=[])
-    puts path
-    puts types
     files = []
     types.each do |type|
       files << Dir.glob("#{path}/**/*.#{type}")
