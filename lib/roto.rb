@@ -17,4 +17,10 @@ class Roto
 			FileUtils.mv("#{file}", "#{destination}")
 		end
   end
+
+  def copy_photos(files, destination)
+    files.each do |file|
+			FileUtils.cp("#{file}", "#{destination}")
+		end
+  end
 end

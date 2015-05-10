@@ -5,16 +5,20 @@ class TestRoto < Minitest::Test
   def setup
     @roto = Roto.new
     @path = "#{Dir.pwd}/test/fixtures"
+    @moved_files_path = "#{Dir.pwd}/test/moved_files"
+    @duplicates_path = "#{Dir.pwd}/test/duplicates"
     FileUtils.touch("#{@path}/test.jpg")
     FileUtils.touch("#{@path}/test.png")
     FileUtils.touch("#{@path}/test.mp4")
+    @filetypes = ['mp4', 'jpg', 'png']
   end
 
   def teardown
-    FileUtils.rm_rf("#{@path}/moved_files/.")
+    FileUtils.rm_rf("#{@moved_files_path}/.")
+    FileUtils.rm_rf("#{@duplicates_path}/.")
   end
-  
-  def test_that_finder_can_find_jpgs    
+
+  def test_that_finder_can_find_jpgs
     filetypes=['jpg']
     photos = @roto.find_photos(@path, filetypes)
     assert_equal ["#{@path}/test.jpg"], photos
@@ -40,13 +44,26 @@ class TestRoto < Minitest::Test
 
 
   def test_that_mover_can_move
-    filetypes = ['mp4', 'jpg', 'png']
-    destinaton = "#{@path}/moved_files"
-    files = @roto.find_photos(@path, filetypes)
-    @roto.move_files(files, destinaton)
-    assert_equal ["#{destinaton}/test.mp4", "#{destinaton}/test.jpg", "#{destinaton}/test.png"], @roto.find_photos(destinaton, filetypes)
+    files = @roto.find_photos(@path, @filetypes)
+    @roto.move_files(files, @moved_files_path)
+    assert_equal ["test.mp4", "test.jpg", "test.png"], @roto.find_photos(@moved_files_path, @filetypes).map {|path| File.basename path}
+  end
+
+  def test_that_copier_can_copy
+    files = @roto.find_photos(@path, @filetypes)
+    @roto.copy_photos(files, @moved_files_path)
+    assert_equal ["test.mp4", "test.jpg", "test.png"], @roto.find_photos(@moved_files_path, @filetypes).map {|path| File.basename path}
+    assert_equal ["test.mp4", "test.jpg", "test.png"], @roto.find_photos(@path, @filetypes).map {|path| File.basename path}
   end
 
   def test_that_duplicates_are_reconciled
+    FileUtils.touch("#{@duplicates_path}/test.jpg")
+    FileUtils.touch("#{@duplicates_path}/test.png")
+    FileUtils.touch("#{@duplicates_path}/test.mp4")
+    files = []
+    files << @roto.find_photos(@path, @filetypes)
+    files << @roto.find_photos(@duplicates_path, @filetypes)
+    @roto.copy_photos(files.flatten, @moved_files_path)
+    assert_equal ["test.mp4", "test.jpg", "test.png", "test_2.mp4", "test_2.jpg", "test_2.png"], @roto.find_photos(@moved_files_path, @filetypes).map {|path| File.basename path}
   end
 end
