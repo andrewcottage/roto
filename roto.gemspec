@@ -10,4 +10,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/andrewcottage/roto'
   s.license       = 'MIT'
   s.executables << 'roto'
+  s.dependency 'ruby-progressbar'
 end
