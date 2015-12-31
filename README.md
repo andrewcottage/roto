@@ -15,3 +15,19 @@ or
 ```ruby
 gem install roto
 ```
+Examples
+
+- Find Files and copy them
+```
+roto = Roto.new
+path = "some/path/with/photos
+roto.find_files(path)
+ 
+new_path = "some/new/path/for/photos"
+roto.copy_photos(new_path)
+```
+ 
+ Or move photos permanently (use caution)
+```ruby
+ roto.move_photos(new_path)
+```
