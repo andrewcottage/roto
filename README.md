@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/roto.svg)](https://badge.fury.io/rb/roto)
 # Roto
 Roto the ruby photo finder
 
