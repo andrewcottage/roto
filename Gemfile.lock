@@ -2,9 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.6.1)
+    ruby-progressbar (1.7.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   minitest
+  ruby-progressbar
+
+BUNDLED WITH
+   1.10.4

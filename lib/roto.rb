@@ -9,16 +9,11 @@ class Roto
     @types = ['.mp4', '.jpg', '.png']
   end
 
-  def uniq_files_only
-    @types.uniq!
-  end
-
   def find_files(path)
-    @types.each do |type|
-      Find.find(path).each do |file|
-        if @types.include?(File.extname(file))
-          @files << file
-        end
+    Find.find(path).each do |file|
+      if @types.include?(File.extname(file).downcase)
+        @files << file
+        puts "on file #{@files.index(file) + 1} of #{files.count}"
       end
     end
   end
