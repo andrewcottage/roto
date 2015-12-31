@@ -20,16 +20,18 @@ class Roto
   end
 
   def move_files(destination)
+    progressbar = ProgressBar.create(total: @files.count)
   	@files.each do |file|
 			FileUtils.mv("#{file}", "#{destination}")
-      puts "on file #{@files.index(file) + 1} of #{files.count}"
+      progressbar.increment
 		end
   end
 
   def copy_files(destination)
+    progressbar = ProgressBar.create(total: @files.count)
     @files.each do |file|
 			FileUtils.cp("#{file}", "#{destination}")
-      puts "on file #{@files.index(file) + 1} of #{files.count}"
+      progressbar.increment
 		end
   end
 end
