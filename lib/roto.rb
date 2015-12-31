@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'find'
+require 'ruby-progressbar'
 
 class Roto
   attr_reader :files
@@ -13,6 +14,7 @@ class Roto
     Find.find(path).each do |file|
       if @types.include?(File.extname(file).downcase)
         @files << file
+        puts "collected #{@files.count} files"
       end
     end
   end
@@ -20,6 +22,7 @@ class Roto
   def move_files(destination)
   	@files.each do |file|
 			FileUtils.mv("#{file}", "#{destination}")
+      puts "on file #{@files.index(file) + 1} of #{files.count}"
 		end
   end
 
