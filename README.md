@@ -25,7 +25,9 @@ Examples
  
  new_path = "some/new/path/for/photos"
  roto.copy_photos(new_path)
+ ```
  
- # Or move photos permanently (use caution)
+ Or move photos permanently (use caution)
+ ```ruby
  roto.move_photos(new_path)
 ```
