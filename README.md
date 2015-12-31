@@ -19,15 +19,15 @@ Examples
 
 - Find Files and copy them
 ```ruby
- roto = Roto.new
- path = "some/path/with/photos
- roto.find_files(path)
+roto = Roto.new
+path = "some/path/with/photos
+roto.find_files(path)
  
- new_path = "some/new/path/for/photos"
- roto.copy_photos(new_path)
- ```
+new_path = "some/new/path/for/photos"
+roto.copy_photos(new_path)
+```
  
  Or move photos permanently (use caution)
- ```ruby
+```ruby
  roto.move_photos(new_path)
 ```
