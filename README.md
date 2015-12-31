@@ -18,7 +18,7 @@ gem install roto
 Examples
 
 - Find Files and copy them
-```ruby
+```
 roto = Roto.new
 path = "some/path/with/photos
 roto.find_files(path)
