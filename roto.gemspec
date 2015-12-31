@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'roto'
-  s.version     = '0.0.7'
+  s.version     = '0.0.8'
   s.date        = '2015-12-30'
   s.summary     = "Roto the Ruby Photo Finder!"
   s.description = "A gem to find and move photos on your computer"
@@ -10,5 +10,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/andrewcottage/roto'
   s.license       = 'MIT'
   s.executables << 'roto'
-  s.add_development_dependency 'ruby-progressbar'
+  spec.add_runtime_dependency 'ruby-progressbar'
 end
