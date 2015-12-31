@@ -13,7 +13,6 @@ class Roto
     Find.find(path).each do |file|
       if @types.include?(File.extname(file).downcase)
         @files << file
-        puts "on file #{@files.index(file) + 1} of #{files.count}"
       end
     end
   end
@@ -27,6 +26,7 @@ class Roto
   def copy_files(destination)
     @files.each do |file|
 			FileUtils.cp("#{file}", "#{destination}")
+      puts "on file #{@files.index(file) + 1} of #{files.count}"
 		end
   end
 end

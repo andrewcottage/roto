@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'roto'
+puts Roto.new.find_files(ARGV[0]).copy_files(ARGV[1])
