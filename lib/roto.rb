@@ -3,11 +3,10 @@ require 'find'
 require 'ruby-progressbar'
 
 class Roto
-  attr_reader :files
-  attr_accessor :types
+  attr_accessor :types, :files
   def initialize
     @files = []
-    @types = ['.mp4', '.jpg', '.png']
+    @types = ['.mp4', '.mov', '.jpg', '.png']
   end
 
   def find_files(path)
