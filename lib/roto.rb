@@ -4,9 +4,12 @@ require 'ruby-progressbar'
 
 class Roto
   attr_accessor :types, :files
+  attr_reader :files
+
   def initialize
     @files = []
     @types = ['.mp4', '.mov', '.jpg', '.png']
+    @errors = {}
   end
 
   def find_files(path)
@@ -22,16 +25,24 @@ class Roto
   def move_files(destination)
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
   	@files.each do |file|
-			FileUtils.mv("#{file}", "#{destination}")
-      progressbar.increment
+      begin
+  			FileUtils.mv("#{file}", "#{destination}")
+        progressbar.increment
+      rescue => error
+        @errors[file] = error
+      end
 		end
   end
 
   def copy_files(destination)
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
     @files.each do |file|
-			FileUtils.cp("#{file}", "#{destination}")
-      progressbar.increment
+      begin
+        FileUtils.cp("#{file}", "#{destination}")
+        progressbar.increment
+      rescue => error
+        @errors[file] = error
+      end
 		end
   end
 end
