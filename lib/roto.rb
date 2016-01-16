@@ -4,7 +4,7 @@ require 'ruby-progressbar'
 
 class Roto
   attr_accessor :types, :files, :rename_files
-  attr_reader :files
+  attr_reader :files, :errors
 
   def initialize
     @files = []
@@ -26,9 +26,11 @@ class Roto
   def move_files(destination)
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
   	@files.each do |file|
+      filename = File.basename(file)
+      ext = File.extname(file)
+      name = File.basename(file, ext)
       begin
-        if @rename_duplicates
-          ext = File.extname(file); name = File.basename(file, ext)
+        if File.exist?("#{destination}/#{filename}") && @rename_duplicates
           FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         else
 			     FileUtils.mv("#{file}", "#{destination}")
@@ -43,9 +45,11 @@ class Roto
   def copy_files(destination)
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
     @files.each do |file|
+      filename = File.basename(file)
+      ext = File.extname(file)
+      name = File.basename(file, ext)
       begin
-        if @rename_duplicates
-          ext = File.extname(file); name = File.basename(file, ext)
+        if File.exist?("#{destination}/#{filename}") && @rename_duplicates
           FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         else
           FileUtils.cp("#{file}", "#{destination}")
