@@ -32,3 +32,10 @@ roto.copy_photos(new_path)
 ```ruby
  roto.move_photos(new_path)
 ```
+
+It will rename duplicates by defaut, but to change this behaviour do
+```ruby
+roto = Roto.new
+roto.rename_files = false
+```
+
