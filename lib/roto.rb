@@ -9,7 +9,7 @@ class Roto
   def initialize
     @files = []
     @types = ['.mp4', '.mov', '.jpg', '.png', '.mts']
-    @rename_duplicatees = true
+    @rename_duplicates = true
     @errors = {}
   end
 
@@ -27,7 +27,7 @@ class Roto
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
   	@files.each do |file|
       begin
-        if @rename_duplicatees
+        if @rename_duplicates
           ext = File.ext(file); name = File.basename(file, ext)
           FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         else
@@ -44,7 +44,7 @@ class Roto
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
     @files.each do |file|
       begin
-        if @rename_duplicatees
+        if @rename_duplicates
           ext = File.ext(file); name = File.basename(file, ext)
           FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         else
