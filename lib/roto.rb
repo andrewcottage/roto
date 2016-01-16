@@ -28,7 +28,7 @@ class Roto
   	@files.each do |file|
       begin
         if @rename_duplicates
-          ext = File.ext(file); name = File.basename(file, ext)
+          ext = File.extname(file); name = File.basename(file, ext)
           FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         else
 			     FileUtils.mv("#{file}", "#{destination}")
@@ -45,7 +45,7 @@ class Roto
     @files.each do |file|
       begin
         if @rename_duplicates
-          ext = File.ext(file); name = File.basename(file, ext)
+          ext = File.extname(file); name = File.basename(file, ext)
           FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         else
           FileUtils.cp("#{file}", "#{destination}")
