@@ -3,12 +3,13 @@ require 'find'
 require 'ruby-progressbar'
 
 class Roto
-  attr_accessor :types, :files
+  attr_accessor :types, :files, :rename_files
   attr_reader :files
 
   def initialize
     @files = []
-    @types = ['.mp4', '.mov', '.jpg', '.png']
+    @types = ['.mp4', '.mov', '.jpg', '.png', '.mts']
+    @rename_duplicatees = true
     @errors = {}
   end
 
@@ -26,7 +27,12 @@ class Roto
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
   	@files.each do |file|
       begin
-  			FileUtils.mv("#{file}", "#{destination}")
+        if @rename_duplicatees
+          ext = File.ext(file); name = File.basename(file, ext)
+          FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
+        else
+			     FileUtils.mv("#{file}", "#{destination}")
+         end
         progressbar.increment
       rescue => error
         @errors[file] = error
@@ -38,7 +44,12 @@ class Roto
     progressbar = ProgressBar.create(total: @files.count, format: '%w')
     @files.each do |file|
       begin
-        FileUtils.cp("#{file}", "#{destination}")
+        if @rename_duplicatees
+          ext = File.ext(file); name = File.basename(file, ext)
+          FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
+        else
+          FileUtils.cp("#{file}", "#{destination}")
+        end
         progressbar.increment
       rescue => error
         @errors[file] = error
