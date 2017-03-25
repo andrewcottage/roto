@@ -24,7 +24,7 @@ class Roto
   end
 
   def move_files(destination)
-    progressbar = ProgressBar.create(total: @files.count, format: '%w')
+    progressbar = ProgressBar.create(total: @files.count, format: '%a %B %p%% %t')
   	@files.each do |file|
       filename = File.basename(file)
       ext = File.extname(file)
@@ -41,7 +41,7 @@ class Roto
   end
 
   def copy_files(destination)
-    progressbar = ProgressBar.create(total: @files.count, format: '%w')
+    progressbar = ProgressBar.create(total: @files.count, format: '%a %B %p%% %t')
     @files.each do |file|
       filename = File.basename(file)
       ext = File.extname(file)
