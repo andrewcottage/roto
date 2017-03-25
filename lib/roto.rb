@@ -3,7 +3,7 @@ require 'find'
 require 'ruby-progressbar'
 
 class Roto
-  attr_accessor :types, :files, :rename_files
+  attr_accessor :types, :files, :rename_duplicates
   attr_reader :files, :errors
 
   def initialize
@@ -31,15 +31,13 @@ class Roto
       name = File.basename(file, ext)
       begin
         if File.exist?("#{destination}/#{filename}") && @rename_duplicates
-          FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
-        else
-			     FileUtils.mv("#{file}", "#{destination}")
-         end
+          FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")  
+        end
         progressbar.increment
       rescue => error
         @errors[file] = error
       end
-		end
+    end
   end
 
   def copy_files(destination)
@@ -50,14 +48,12 @@ class Roto
       name = File.basename(file, ext)
       begin
         if File.exist?("#{destination}/#{filename}") && @rename_duplicates
-          FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
-        else
-          FileUtils.cp("#{file}", "#{destination}")
+          FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")    
         end
         progressbar.increment
       rescue => error
         @errors[file] = error
       end
-		end
+    end
   end
 end
