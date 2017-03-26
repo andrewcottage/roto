@@ -4,7 +4,7 @@ require 'ruby-progressbar'
 
 class Roto
   attr_accessor :types, :files, :rename_duplicates
-  attr_reader :files, :errors
+  attr_reader :errors
 
   def initialize
     @files = []
@@ -14,7 +14,7 @@ class Roto
   end
 
   def find_files(path)
-    progressbar = ProgressBar.create(:total => nil, :unknown_progress_animation_steps => ['==>', '>==', '=>='])
+    progressbar = ProgressBar.create(total: nil, format: "%a Photos Found: %c")
     Find.find(path).each do |file|
       if @types.include?(File.extname(file).downcase)
         @files << file
@@ -31,7 +31,7 @@ class Roto
       name = File.basename(file, ext)
       begin
         if File.exist?("#{destination}/#{filename}") && @rename_duplicates
-          FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")  
+          FileUtils.mv("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         end
         progressbar.increment
       rescue => error
@@ -48,7 +48,7 @@ class Roto
       name = File.basename(file, ext)
       begin
         if File.exist?("#{destination}/#{filename}") && @rename_duplicates
-          FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")    
+          FileUtils.cp("#{file}", "#{destination}/#{name}_#{Time.now.to_i}#{ext}")
         end
         progressbar.increment
       rescue => error
