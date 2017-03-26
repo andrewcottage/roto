@@ -24,6 +24,7 @@ class Roto
       end
     end
     @logger.info("Found: #{@files.count} files")
+    self
   end
 
   def move_files(destination)
