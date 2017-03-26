@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'roto'
-puts Roto.new.find_files(ARGV[0]).copy_files(ARGV[1])
+case ARGV[0]
+when "copy"
+  Roto.new.find_files(ARGV[1]).copy_files(ARGV[2])
+when "move"
+  Roto.new.find_files(ARGV[1]).move_files(ARGV[2])
+end
