@@ -3,16 +3,16 @@
 Roto the ruby photo finder
 
 
-Roto is an easy way to find and move all of the photos on your computer, while segregading duplicates and organizing them into 
+Roto is an easy way to find and move all of the photos on your computer, while segregading duplicates and organizing them into
 a clean readable folder structure that allows you to take control your photos
 
 
 Installation
 
 ```ruby
-gem 'roto' 
+gem 'roto'
 ```
-or 
+or
 ```ruby
 gem install roto
 ```
@@ -23,19 +23,23 @@ Examples
 roto = Roto.new
 path = "some/path/with/photos
 roto.find_files(path)
- 
+
 new_path = "some/new/path/for/photos"
 roto.copy_photos(new_path)
 ```
- 
+
  Or move photos permanently (use caution)
 ```ruby
  roto.move_photos(new_path)
 ```
 
-It will rename duplicates by defaut, but to change this behaviour do
+It will rename duplicates by default, but to change this behavior do
 ```ruby
 roto = Roto.new
 roto.rename_duplicates = false
 ```
 
+Roto also ships as an executable. Simply do
+```
+roto copy path/to/source/directory path/to/destination/directory
+```
