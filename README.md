@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/roto.svg)](https://badge.fury.io/rb/roto)
+[![CircleCI](https://circleci.com/gh/andrewcottage/roto.svg?style=svg)](https://circleci.com/gh/andrewcottage/roto)
 # Roto
 Roto the ruby photo finder
 
